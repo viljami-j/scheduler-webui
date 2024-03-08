@@ -5,4 +5,4 @@ A simple 2-stage tool for planning printable schedules.
 
 This repository contains the second stage, data display. [Live demo](https://scheduler-webui.web.app/).
 
-[Sample output](sample-output/viikko.csv) (also conveniently, another way to visualize the data).
+[Sample input](sample-input/viikko.csv) (also conveniently, an alternative way to visualize the data).
