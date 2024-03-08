@@ -1,0 +1,141 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-label {
+  width: 150px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  font-size: larger;
+  margin: auto;
+  padding: 3px;
+}
+
+#csvInput {
+  display: none;
+}
+
+.title {
+  color: green;
+}
+
+.timetable-title {
+  color: green;
+  display: flex;
+}
+
+.timetable-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 90rem;
+  margin: 2% auto;
+  box-shadow: 0px 5px 10px gray;
+  border-radius: 15px;
+  padding: 3%;
+
+  background-color: rgb(212, 243, 235)
+}
+
+.flex-container {
+  display: flex; /* Create a flex container */
+  justify-content: space-between; /* Space items evenly */
+  flex-direction: row; /* Lay out items horizontally */
+  width: 1000px; /* Magically keeps line items centered*/
+  height: 80px;
+}
+
+.flex-header-item {
+  min-width: 150px;
+  padding: 2px;
+  border-radius: 10px;
+  text-align: left;
+  font-weight:400;
+
+  background-color: lightblue;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+
+  font-size: large;
+}
+
+.flex-time-item {
+  min-width: 60px;
+  padding: 2px;
+  border-radius: 10px;
+  text-align: left;
+  font-weight:400;
+
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  font-weight: 300;
+
+  font-size: large;
+}
+
+.flex-item {
+  min-width: 150px;
+  margin: 0 auto;
+  padding: 2px;
+  text-align: left;
+  overflow-wrap: break-word;
+  font-weight: 300;
+
+  background-color: rgb(178, 254, 254);
+  padding: 10px;
+  margin: 5px;
+}
+
+
+@media print { 
+  /* Styles used for printing */
+  .hide-from-print {
+    display: none !important;
+  }
+
+  .timetable-title {
+    color: green;
+    margin-top: 0px;
+    display: flex;
+  }
+  
+ }
