@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Papa from "papaparse";
 import "./App.css";
 
 // Allowed extensions for input file
@@ -42,37 +41,6 @@ const App = () => {
       setFile(inputFile);
     }
   };
-  // const handleParse = () => {
-
-  //   // If user clicks the parse button without
-  //   // a file we show a error
-  //   if (!file)
-  //     return alert("Lisää ensin CSV lähdetiedosto");
-
-  //   // Initialize a reader which allows user
-  //   // to read any file or blob.
-  //   const reader = new FileReader();
-
-  //   // Event listener on reader when the file
-  //   // loads, we parse it and set the data.
-  //   reader.onload = async ({ target }) => {
-  //     const csv = Papa.parse(target.result, {
-  //       header: true,
-  //       delimiter: ",",
-  //       newline: "\n",
-        
-  //     });
-  //     const parsedData = csv?.data;
-  //     console.log(parsedData);
-  //     const rows = Object.keys(parsedData[0]);
-  //     const columns = Object.values(parsedData[0]);
-  //     const res = rows.reduce((acc, e, i) => {
-  //       return [...acc, [[e], columns[i]]];
-  //     }, []);
-  //     setData(res);
-  //   };
-  //   reader.readAsText(file);
-  //};
 
   const handleParse = () => {
 
@@ -90,6 +58,7 @@ const App = () => {
     reader.onload = async ({ target }) => {
       const csv = parseInput(target.result);
       setData(csv);
+      console.log(csv);
       return csv;
     };
     reader.readAsText(file);
@@ -98,12 +67,12 @@ const App = () => {
   function parseInput(input) {
     const records = input.split('\n'); // Split by newline characters
     const parsedData = records.map((record) => {
-        const values = record.split(','); // Split each record by commas
-        return values;
+      const values = record.split(','); // Split each record by commas
+      return values;
     });
 
     return parsedData;
-}
+  }
 
   const handlePrint = () => {
     window.print();
@@ -115,6 +84,7 @@ const App = () => {
         <h1 className="title">Viikkojärjestyksen luontityökalu</h1>
         <h4>Luo viikkojärjestys CSV tiedostosta.</h4>
         <h5>Formaatti: aika, ma, ti, ke, to, pe, la, su</h5>
+        <h5>Generoi työkalulla joka löytyy <a href="https://github.com/viljami-j/scheduler">täältä</a></h5>
         <label
           htmlFor="csvInput"
           className="btn-label"
@@ -146,60 +116,93 @@ const App = () => {
         <div className="flex-container">
           <h1 className="timetable-title">Aikataulu</h1>
         </div>
-
-        <div className="flex-container">
+        <div>
           {error
             ? error
             : data.map((e, i) => (
-              i != 0 ?
-                <div key={i} className="flex-header-item" htmlFor="print">
-                  {e[0]}
+              i == 0 ?
+                <div className="flex-container" key={"header_row"}>
+                  <div key={"r_" + i + "_c_" + 0} className="flex-time-item">
+                    {e[0]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 1} className="flex-header-item">
+                    {e[1]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 2} className="flex-header-item">
+                    {e[2]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 3} className="flex-header-item">
+                    {e[3]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 4} className="flex-header-item">
+                    {e[4]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 5} className="flex-header-item">
+                    {e[5]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 6} className="flex-header-item">
+                    {e[6]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 7} className="flex-header-item">
+                    {e[7]}
+                  </div>
                 </div>
                 :
-                <div key={i} className="flex-time-item" htmlFor="print">
-                  {e[0]}
-                </div>
-            ))}
-        </div>
-        <div className="flex-container">
-          {error
-            ? error
-            : data.map((e, i) => (
-              i != 0 ?
-                <div key={i} className="flex-item">
-                  {e[i]}
-                </div>
-                :
-                <div key={i} className="flex-time-item">
-                  {e[i]}
+                <div className="flex-container" key={"data_row_" + i}>
+                  <div key={"r_" + i + "_c_" + 0} className="flex-time-item">
+                    {e[0]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 1} className="flex-item">
+                    {e[1]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 2} className="flex-item">
+                    {e[2]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 3} className="flex-item">
+                    {e[3]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 4} className="flex-item">
+                    {e[4]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 5} className="flex-item">
+                    {e[5]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 6} className="flex-item">
+                    {e[6]}
+                  </div>
+                  <div key={"r_" + i + "_c_" + 7} className="flex-item">
+                    {e[7]}
+                  </div>
                 </div>
             ))}
         </div>
       </div>
-      <hr></hr>
-      <div className="experimental" style={{ borderRadius: "100px", height: "300px", width: "500px", fontWeight: 300, color: "black", backgroundColor: "navajowhite", marginRight: "10px" }}>
-        <br/>
-        <h3 style={{ fontWeight: 300, marginTop: "20px" }}>Kokeelliset asetukset (ei toiminnassa)</h3>
-        <div>
-          <label style={{ marginRight: "10px" }}>Taustaväri: </label>
-          <input type="color"></input>
+      <div className="hide-from-print">
+        <hr></hr>
+        <div className="experimental" style={{ borderRadius: "100px", height: "300px", width: "500px", fontWeight: 300, color: "black", backgroundColor: "navajowhite", marginRight: "10px" }}>
+          <br />
+          <h3 style={{ fontWeight: 300, marginTop: "20px" }}>Kokeelliset asetukset (ei toiminnassa)</h3>
+          <div>
+            <label style={{ marginRight: "10px" }}>Taustaväri: </label>
+            <input type="color"></input>
+          </div>
+          <br />
+          <div>
+            <label style={{ marginRight: "10px" }}>Otsikkoväri: </label>
+            <input type="color"></input>
+          </div>
+          <br />
+          <div>
+            <label style={{ marginRight: "10px" }}>Otsikkokuplien väri: </label>
+            <input type="color"></input>
+          </div>
+          <br />
+          <div>
+            <label style={{ marginRight: "10px" }}>Aikatekstiväri: </label>
+            <input type="color"></input>
+          </div>
+          <br />
         </div>
-        <br/>
-        <div>
-          <label style={{ marginRight: "10px" }}>Otsikkoväri: </label>
-          <input type="color"></input>
-        </div>
-        <br/>
-        <div>
-          <label style={{ marginRight: "10px" }}>Otsikkokuplien väri: </label>
-          <input type="color"></input>
-        </div>
-        <br/>
-        <div>
-          <label style={{ marginRight: "10px" }}>Aikatekstiväri: </label>
-          <input type="color"></input>
-        </div>
-        <br/>
       </div>
     </div>
   );
